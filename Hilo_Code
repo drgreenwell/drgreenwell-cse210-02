@@ -49,10 +49,8 @@ def main():
     score = Score()
 
     hilo.display_card()
-    guess = str(input("Higher or Lower? [h/l] ")
-    
+    guess = str(input("Higher or Lower? [h/l] "))
     score.adjust_score(hilo.new_card(guess))
-    
     score.display_score()
 
 if __name__ == "__main__":
