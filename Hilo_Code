@@ -60,7 +60,7 @@ def main():
         score.display_score() #Calls The display_score Function From Score Class
 
         if score.player_score <= 0: #If Score Is Zero Or Below, Break While Loop And Display End Game Message
-            print("You Lose. Have A Good Day.")
+            print("You Lost. Have A Good Day.")
             print("")
             break
 
