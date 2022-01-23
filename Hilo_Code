@@ -33,25 +33,37 @@ class Hilo:
 
         if guess == 'h':
             if self.new_card > self.current_card:
+                self.current_card = self.new_card
                 return 100
             else:
+                self.current_card = self.new_card
                 return -75
-
-        if guess == 'l':
+        elif guess == 'l':
             if self.new_card < self.current_card:
+                self.current_card = self.new_card
                 return 100
             else:
+                self.current_card = self.new_card
                 return -75
 
 def main():
     hilo = Hilo()
-    guess = ""
     score = Score()
+    again = ""
 
-    hilo.display_card()
-    guess = str(input("Higher or Lower? [h/l] "))
-    score.adjust_score(hilo.new_card(guess))
-    score.display_score()
+    while again != 'n':
+        hilo.display_card()
+        guess = str(input("Higher or Lower? [h/l] "))
+        guess = guess.lower()
+        score.adjust_score(hilo.new_card(guess))
+        
+        if score.player_score <= 0:
+            break
+        
+        score.display_score()
+        again = str(input("Play Again? [y/n] "))
+        again = again.lower()
+        print("")
 
 if __name__ == "__main__":
     main()
