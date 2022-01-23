@@ -9,13 +9,51 @@ class Score:
     def __init__(self):
         self.player_score = 300
     
-    def display_score:
-        print(self.player_score)
+    def display_score(self):
+        print(f"Your score is: {self.player_score}")
 
+    def adjust_score(self, value):
+        self.player_score += value
+        return self.player_score
 
 class Hilo:
+    def __init__(self):
+        self.current_card = random.randint(1, 13)
+
+    def display_card(self):
+        print(f"Your card is: {self.current_card}")
+
+    def new_card(self, guess):
+        self.new_card = random.randint(1, 13)
+        
+        if self.new_card == self.current_card:
+            self.new_card = random.randint(1, 13)
+
+        print(f"Next card was: {self.new_card}")
+
+        if guess == 'h':
+            if self.new_card > self.current_card:
+                return 100
+            else:
+                return -75
+
+        if guess == 'l':
+            if self.new_card < self.current_card:
+                return 100
+            else:
+                return -75
 
 def main():
+    hilo = Hilo()
+    guess = ""
+    score = Score()
+
+    hilo.display_card()
+    guess = str(input("Higher or Lower? [h/l] ")
+    
+    score.adjust_score(hilo.new_card(guess))
+    
+    score.display_score()
 
 if __name__ == "__main__":
     main()
