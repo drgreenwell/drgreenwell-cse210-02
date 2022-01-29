@@ -1,6 +1,9 @@
 # drgreenwell-cse210-02
 
-For CSE 210.
+Team 7: Daniel Greenwell, Sean Layton, Brigham GARCIA, Caleb Hatch
+Team Lead: Daniel Greenwell
+Class: CSE 210
+Assignment: W04 Prove: Developer - Team Code Submission
 
 This Game of Hilo is played according to the following rules:
 
