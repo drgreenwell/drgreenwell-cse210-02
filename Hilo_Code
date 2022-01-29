@@ -1,73 +1,83 @@
 """
-Group: Daniel Greenwell, Sean Layton, Jordan Johnson, Brigham GARCIA 
+Group: Daniel Greenwell, Sean Layton, Jordan Johnson, Brigham GARCIA, Caleb Hatch
 Class: CSE 210
 Assignment: W04 Prove: Developer - Team Code Submission
 """
 import random
 
+
 class Score:
     def __init__(self):
-        self.player_score = 300 #Sets Initial Score To 300
-    
+        self.player_score = 300  # Sets Initial Score To 300
+
     def display_score(self):
-        print(f"Your score is: {self.player_score}") #Displays Score When Called
+        print(f"Your score is: {self.player_score}")  # Displays Score When Called
 
     def adjust_score(self, value):
-        self.player_score += value #Adds Input Value To Current Score
+        self.player_score += value  # Adds Input Value To Current Score
+
 
 class Hilo:
     def __init__(self):
-        self.current_card = random.randint(1, 13) #Sets Inital Starting Card To A Random Number
+        self.current_card = random.randint(1, 13)  # Sets Initial Starting Card To A Random Number
 
     def display_card(self):
-        print(f"Your card is: {self.current_card}") #Displays Current Card When Called
+        print(f"Your card is: {self.current_card}")  # Displays Current Card When Called
 
     def guess_card(self, guess):
-        self.new_card = random.randint(1, 13) #Sets New Card To A Random Number
-        
+        self.new_card = random.randint(1, 13)  # Sets New Card To A Random Number
+
         if self.new_card == self.current_card:
-            self.new_card = random.randint(1, 13) #If New Card Is Same To Current Card, "Draw" A New Card
+            self.new_card = random.randint(1, 13)  # If New Card Is Same To Current Card, "Draw" A New Card
 
-        print(f"Next card was: {self.new_card}") #Displays The New Card
+        print(f"Next card was: {self.new_card}")  # Displays The New Card
 
-        if guess == 'h': #If Player Guessed High, Figure Out If New Card Is Higher Than Current Card And Award Points Accordingly
+        if guess == 'h':  # If Player Guessed High, Figure Out If New Card Is Higher Than Current Card And Award
+            # Points Accordingly
             if self.new_card > self.current_card:
-                self.current_card = self.new_card #Replaces Old Current Card With New Card
-                return 100 #Returns Score Value For Use In The adjust_score Function From Score Class
+                self.current_card = self.new_card  # Replaces Old Current Card With New Card
+                return 100  # Returns Score Value For Use In The adjust_score Function From Score Class
             else:
-                self.current_card = self.new_card #Replaces Old Current Card With New Card
-                return -75 #Returns Score Value For Use In The adjust_score Function From Score Class
-        elif guess == 'l': #If Player Guessed Low, Figure Out If New Card Is Lower Than Current Card And Award Points Accordingly
+                self.current_card = self.new_card  # Replaces Old Current Card With New Card
+                return -75  # Returns Score Value For Use In The adjust_score Function From Score Class
+        elif guess == 'l':  # If Player Guessed Low, Figure Out If New Card Is Lower Than Current Card And Award
+            # Points Accordingly
             if self.new_card < self.current_card:
-                self.current_card = self.new_card #Replaces Old Current Card With New Card
-                return 100 #Returns Score Value For Use In The adjust_score Function From Score Class
+                self.current_card = self.new_card  # Replaces Old Current Card With New Card
+                return 100  # Returns Score Value For Use In The adjust_score Function From Score Class
             else:
-                self.current_card = self.new_card #Replaces Old Current Card With New Card
-                return -75 #Returns Score Value For Use In The adjust_score Function From Score Class
+                self.current_card = self.new_card  # Replaces Old Current Card With New Card
+                return -75  # Returns Score Value For Use In The adjust_score Function From Score Class
+        else:
+            print("Invalid input detected. Please enter either \"h\" or \"l\"")
+            quit()
+
 
 def main():
-    #Initial Values For The Game
+    # Initial Values For The Game
     hilo = Hilo()
     score = Score()
-    guess = ""
     again = ""
 
+    while again != 'n':  # Loops Game Until Player Decides To Quit Playing
+        hilo.display_card()  # Calls The display_card Function From Hilo Class
+        guess = str(input("Higher or Lower? [h/l] "))  # Asks Player For Guess And Stores Input
+        guess = guess.lower()  # Converts Input To Lower Case If Needed
+        score.adjust_score(hilo.guess_card(guess))  # Takes Guess Output And Calls guess_card Function From Hilo Class.
+        # Then Takes Output From guess card And Calls adjust_score From Score Class
+        score.display_score()  # Calls The display_score Function From Score Class
 
-    while again != 'n': #Loops Game Until Player Decides To Quit Playing
-        hilo.display_card() #Calls The display_card Function From Hilo Class
-        guess = str(input("Higher or Lower? [h/l] ")) #Asks Player For Guess And Stores Input
-        guess = guess.lower() #Converts Input To Lower Case If Needed
-        score.adjust_score(hilo.guess_card(guess)) #Takes Guess Output And Calls guess_card Function From Hilo Class. Then Takes Output From guess_card And Calls adjust_score From Score Class
-        score.display_score() #Calls The display_score Function From Score Class
-
-        if score.player_score <= 0: #If Score Is Zero Or Below, Break While Loop And Display End Game Message
+        if score.player_score <= 0:  # If Score Is Zero Or Below, Break While Loop And Display End Game Message
             print("You Lost. Have A Good Day.")
             print("")
             break
 
-        again = str(input("Play Again? [y/n] ")) #Asks Player If They Want To Play Again
-        again = again.lower() #Converts Input To Lower Case If Needed
+        again = str(input("Play Again? [y/n] "))  # Asks Player If They Want To Play Again
+        again = again.lower()  # Converts Input To Lower Case If Needed
         print("")
+        if again == "n":
+            print(f"Good game! Thanks for playing.\nGoodbye!")
+
 
 if __name__ == "__main__":
     main()
