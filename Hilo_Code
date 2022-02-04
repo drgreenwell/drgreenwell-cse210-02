@@ -4,8 +4,22 @@ Class: CSE 210
 Assignment: W04 Prove: Developer - Team Code Submission
 """
 import random
+import pickle
 
+#working on showing/recording high score from score.dat will need to change score type to array
+#still has issues 
+try:
+    with open('score.dat', 'rb') as file:
+        score = pickle.load(file)
+except:
+    score = 0
 
+print("High score: %d" % score)
+class Instructions:
+    print('Welcome to HILO! You begin with 300 points.')
+    print('Guess if the next card is higher or lower.') 
+    print('Choose correctly, win points. Guess wrong, lose points.')
+    print()
 class Score:
     def __init__(self):
         self.player_score = 300  # Sets Initial Score To 300
@@ -72,12 +86,17 @@ def main():
             print("")
             break
 
-        again = str(input("Play Again? [y/n] "))  # Asks Player If They Want To Play Again
+        again = str(input("Draw Next Card? [y/n] "))  # Asks Player If They Want To Play Again
         again = again.lower()  # Converts Input To Lower Case If Needed
         print("")
         if again == "n":
-            print(f"Good game! Thanks for playing.\nGoodbye!")
+            print(f"Good game! Thanks for playing.")
+            score = score.display_score()
+            print(f"Goodbye!")
 
+# save the score
+with open('score.dat', 'wb') as file:
+    pickle.dump(score, file)
 
 if __name__ == "__main__":
     main()
